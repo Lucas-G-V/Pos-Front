@@ -1,0 +1,38 @@
+<div class="container main-container">
+
+    <h1>Lista de Receitas</h1>
+
+    <p>
+        <a class="btn btn-info" [routerLink]="['/receita/adicionar-novo']">Nova receita</a>
+    </p>
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Imagem</th>
+                <th>Descrição</th>
+                <th>Preço (R$)</th>
+
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let receita of receitas">
+            <td class="border"><img src="{{receita.urlImagem}}" alt="{{ receita.descricao }}" style="width: 150px; height: 150px;"></td>
+            <td class="border">
+                {{ receita.descricao }}
+            </td>
+            <td class="border">
+                {{ receita.preco | number:'1.2-2' }}
+              </td>
+            
+            <td class="text-right border">
+                <a class="btn btn-info" [routerLink]="['/receita/editar', receita.receitaId]" style="margin-left: 5px; margin-right: 5px;">
+                    Editar
+                </a>
+                <a class="btn btn-danger" (click)="deleteReceita(receita.receitaId)">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

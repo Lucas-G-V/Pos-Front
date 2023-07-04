@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <h3 class="text-xl font-bold mb-4">Edição da Receita</h3>
+    <hr class="my-4">
+  
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <form enctype="multipart/form-data" (ngSubmit)="adicionarEstrutura()" [formGroup]="receitaForm">
+          <div class="alert alert-danger p-4 rounded mb-4" *ngIf="errors.length > 0">
+            <h3 id="msgRetorno" class="font-bold">Opa! Alguma coisa não deu certo:</h3>
+            <ul>
+              <li *ngFor="let error of errors">{{ error }}</li>
+            </ul>
+          </div>
+          <div class="mb-4">
+            <label class="form-label font-bold" for="descricao">Descrição</label>
+            <input class="form-control" id="descricao" type="text" placeholder="Descrição (requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage.descricao}">
+            <span class="text-danger" *ngIf="displayMessage.descricao">
+              <p [innerHTML]="displayMessage.descricao"></p>
+            </span>
+          </div>
+          <div class="mb-4">
+            <label class="form-label font-bold" for="preco">Preço (R$)</label>
+            <input class="form-control" id="preco" type="number" placeholder="Preço (requerido)" formControlName="preco" [ngClass]="{'is-invalid': displayMessage.preco}">
+            <span class="text-danger" *ngIf="displayMessage.preco">
+              <p [innerHTML]="displayMessage.preco"></p>
+            </span>
+          </div>
+          <div class="mb-4">
+            <label class="form-label font-bold">Imagem da Receita</label>
+            <div class="input-group">
+              <input type="file" accept="image/*" class="form-control" id="Imagem" formControlName="imagem" name="imagem" [ngClass]="{'is-invalid': displayMessage.imagem}" (change)="onImagemSelected($event)">
+            </div>
+            <img [src]="UrlImagem" height="500px" width="500px" style="margin-top: 5px;"/>
+          </div>
+  
+          <div class="mb-4">
+            <button type="submit" id="cadastroReceita" [disabled]="!receitaForm.valid" class="btn btn-primary" style="margin-right: 10px;">
+              Salvar
+            </button>
+            <a class="btn btn-secondary" [routerLink]="['/receita']">Voltar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
